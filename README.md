@@ -1,8 +1,8 @@
 # Shopify
-•	An Customer2Customer android application which lets user buy and sell their products
-•	Users can upload their product description like price and category which they want to sell
-•	All other users can browse through all the products and place order
-•	Login and signup functionality is implemented to keep track of users.
+An Customer2Customer android application which lets user buy and sell their products <br />
+Users can upload their product description like price and category which they want to sell<br />
+All other users can browse through all the products and place order<br />
+Login and signup functionality is implemented to keep track of users.<br />
 
 
 #SCREENSHOTS
