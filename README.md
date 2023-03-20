@@ -1,4 +1,4 @@
-# Shopify
+# Shopping Buddy
 An Customer2Customer android application which lets user buy and sell their products <br />
 Users can upload their product description like price and category which they want to sell<br />
 All other users can browse through all the products and place order<br />
