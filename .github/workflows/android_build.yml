@@ -1,0 +1,105 @@
+name : Android Build
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+      - pipeline
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps :
+      - uses: actions/checkout@v1
+
+    - name: Step 1
+      id: step1
+      run: echo "::set-output name=VAR1::Hamel"
+
+    - name: Step 2
+      id: step2
+      run: echo "::set-env name=VAR2::Husain"
+      
+      - name: Branch Name
+        run: |
+          echo $VAR2
+          echo $VAR1 
+
+      # - name: set up JDK 11
+      #   uses: actions/setup-java@v2
+      #   with:
+      #     java-version: '11'
+      #     distribution: 'temurin'
+      #     cache: gradle
+
+      # - name: Make gradlew executable
+        # run: chmod +x ./gradlew
+
+      # - name: Clean Up
+      #   run: ./gradlew clean
+
+      # - name: Build APK
+      #   run: |
+      #     if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #     ./gradlew assembleDebug
+      #     elif [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #     ./gradlew assembleRelease
+      #     else
+      #     echo "Invalid branch for building APK."
+      #     exit 1
+      #     fi
+
+      # - name: Extract branch name
+      #   shell: bash
+      #   run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      #   id: extract_branch
+
+      # - name: Changelog
+      #   id: changelog
+      #   run: |
+      #     echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
+      #     echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
+
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name:  ${{ github.run_number }}
+      #     release_name: Release ${{ steps.extract_branch.outputs.branch }}
+      #     body: ${{ steps.changelog.outputs.changelog }}
+
+      #     draft: false
+      #     prerelease: false
+
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: |
+      #       if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #         app/build/outputs/apk/release/app-release.apk
+      #       elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #         app/build/outputs/apk/debug/app-debug.apk
+      #       else
+      #         echo "Invalid branch for uploading APK."
+      #         exit 1
+      #       fi
+      #     asset_name: |
+      #       if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #         app-release.apk
+      #       elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #         app-debug.apk
+      #       else
+      #         echo "Invalid branch for naming APK."
+      #         exit 1
+      #       fi
+      #     asset_content_type: application/vnd.android.package-archive
+
+
+      # - name: Print Signing Report
+      #   run: ./gradlew signingReport  # Run the signingReport  task to display the signing information
+
