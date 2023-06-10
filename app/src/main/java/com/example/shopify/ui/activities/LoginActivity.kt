@@ -1,4 +1,4 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -23,21 +23,22 @@ class LoginActivity : BaseActivity() {
         @Suppress("Deprecation")
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
+        //sent to LogInActivity
         binding.tvRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
+        // login after validating userDetails
         binding.btnLogin.setOnClickListener {
             logInRegisteredUser( )
         }
 
+//        sent to ForgotPasswordActivity
         binding.tvForgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity((intent))
         }
-
-
     }
 
     private fun validateLoginDetails(): Boolean {
@@ -97,13 +98,14 @@ class LoginActivity : BaseActivity() {
         Log.i("Email: ", user.email)
 
         if (user.profileCompleted == 0) {
-            // If the user profile is incomplete then launch the UserProfileActivity.
+            // If the user profile is incomplete then launch the UserProfileActivity upon login
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
             intent.putExtra(Constants.EXTRA_USER_DETAILS,user)
             startActivity(intent)
         } else {
-            // Redirect the user to Main Screen after log in.
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+
+            // Redirect the user to Main Screen after log in if profile is completed
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()
     }

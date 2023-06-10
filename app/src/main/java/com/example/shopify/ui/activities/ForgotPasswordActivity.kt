@@ -1,4 +1,4 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.os.Bundle
 import android.widget.Toast
@@ -49,9 +49,7 @@ class ForgotPasswordActivity : BaseActivity() {
                     }
             }
         }
-        }
-
-
+    }
 
 
     private fun setupActionBar() {

@@ -8,6 +8,8 @@ import android.webkit.MimeTypeMap
 import androidx.core.app.ActivityCompat.startActivityForResult
 
 object Constants {
+    const val FIRST_NAME: String = "firstName"
+    const val LAST_NAME: String = "lastName"
     const val IMAGE: String = "image"
     const val USERS :String = "users"
     const val Shopify_preferences: String = "MyShopPalPrefs"

@@ -1,4 +1,4 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -17,15 +17,11 @@ class SplashActivity : AppCompatActivity() {
         @Suppress("Deprecation")
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-
         @Suppress("Deprecation")
         Handler().postDelayed({
-                 val intent = Intent(this, LoginActivity::class.java)
+                 val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
             finish()
         },2000)
-
-
-
     }
 }

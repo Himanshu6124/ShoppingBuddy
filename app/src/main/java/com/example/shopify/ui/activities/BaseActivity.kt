@@ -1,12 +1,17 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.app.Dialog
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.shopify.R
 import com.google.android.material.snackbar.Snackbar
 
 open class BaseActivity : AppCompatActivity() {
+
+    private var doubleBackToExitPressedOnce = false
 
     private lateinit var mProgressDialog : Dialog
 
@@ -36,6 +41,7 @@ open class BaseActivity : AppCompatActivity() {
     fun showProgressDialog(text: String) {
         mProgressDialog = Dialog(this)
 
+
         /*Set the screen content from a layout resource.
         The resource will be inflated, adding all top-level views to the screen.*/
         mProgressDialog.setContentView(R.layout.dialog_progress)
@@ -53,6 +59,21 @@ open class BaseActivity : AppCompatActivity() {
 
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
+    }
+
+    fun doubleBackToExit()
+    {
+        if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                return
+            }
+            //if first time
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Please tap back again to exit", Toast.LENGTH_SHORT).show()
+
+            Handler(Looper.getMainLooper()).postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+
+
     }
 
 

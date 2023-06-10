@@ -15,12 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".ui.activities.AddProductActivity"
             android:exported="false"
-            android:label="@string/title_activity_dashboard" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name=".ui.activities.SettingActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.DashboardActivity"
+            android:exported="false"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.activities.UserProfileActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -28,7 +37,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.ForgotPasswordActivity"
+            android:name=".ui.activities.ForgotPasswordActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -36,14 +45,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.BaseActivity"
+            android:name=".ui.activities.BaseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -51,14 +60,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -72,7 +81,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

@@ -1,7 +1,8 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -26,7 +27,6 @@ class RegisterActivity : BaseActivity() {
 
         setupActionBar()
 
-//        setSupportActionBar(findViewById(R.id.toolbar_register_activity))
 
         binding.tvLogin.setOnClickListener {
          onBackPressed()
@@ -41,7 +41,7 @@ class RegisterActivity : BaseActivity() {
 
     private fun setupActionBar() {
 
-
+        // set toolBar as actionBar
         setSupportActionBar(binding.toolbarRegisterActivity)
 
         val actionBar = supportActionBar
@@ -51,8 +51,14 @@ class RegisterActivity : BaseActivity() {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24)
         }
 
-        binding.toolbarRegisterActivity.setNavigationOnClickListener { onBackPressed() }
+        // lambda function when parameter is unused rename it to _
+//        binding.toolbarRegisterActivity.setNavigationOnClickListener { _-> onBackPressed() }
 
+         binding.toolbarRegisterActivity.setNavigationOnClickListener{ onBackPressed() }
+
+
+        // anonymous Function
+        binding.toolbarRegisterActivity.setNavigationOnClickListener(show)
     }
 
     private fun validateRegisterDetails(): Boolean {
@@ -134,6 +140,7 @@ class RegisterActivity : BaseActivity() {
 //                                binding.etPassword.text.toString().trim { it <= ' ' }
                             )
 
+                            // to store data in FireStore as well
                             FirestoreClass().registerUser(this@RegisterActivity, user)
 
 
@@ -174,5 +181,12 @@ class RegisterActivity : BaseActivity() {
         // Finish the Register Screen
         finish()
     }
+
+  private val show = fun(_: View)
+    {
+       onBackPressed()
+
+    }
+
 
 }

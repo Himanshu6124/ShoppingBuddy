@@ -1,7 +1,6 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.shopify.R

@@ -5,10 +5,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.example.shopify.activities.LoginActivity
-import com.example.shopify.activities.RegisterActivity
-import com.example.shopify.activities.UserProfileActivity
+import com.example.shopify.ui.activities.LoginActivity
+import com.example.shopify.ui.activities.RegisterActivity
+import com.example.shopify.ui.activities.UserProfileActivity
 import com.example.shopify.models.User
+import com.example.shopify.ui.activities.SettingActivity
 import com.example.shopify.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -75,6 +76,7 @@ class FirestoreClass {
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val user = document.toObject(User::class.java)!!
 
+                //store name of current user in shared preference to avoid repeat calling of firebase
                 val sharedPreferences =
                     activity.getSharedPreferences(
                         Constants.Shopify_preferences,
@@ -89,12 +91,18 @@ class FirestoreClass {
                 )
                 editor.apply()
 
-
                 when (activity) {
                     is LoginActivity -> {
                         // Call a function of base activity for transferring the result to it.
                         activity.userLoggedInSuccess(user)
                     }
+                    is SettingActivity ->{
+                        // TODO Step 7: Call the function of base class.
+                        // Call a function of base activity for transferring the result to it.
+                        activity.userDetailsSuccess(user)
+                        // END
+                    }
+
                 }
                 // END
             }
@@ -191,6 +199,10 @@ class FirestoreClass {
                 // Hide the progress dialog if there is any error. And print the error in log.
                 when (activity) {
                     is UserProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+
+                    is SettingActivity -> {
                         activity.hideProgressDialog()
                     }
                 }

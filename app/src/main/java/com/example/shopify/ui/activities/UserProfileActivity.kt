@@ -1,4 +1,4 @@
-package com.example.shopify.activities
+package com.example.shopify.ui.activities
 
 import android.Manifest
 import android.app.Activity
@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import com.example.shopify.Firestore.FirestoreClass
 import com.example.shopify.R
 import com.example.shopify.databinding.ActivityUserProfileBinding
@@ -37,13 +38,47 @@ class UserProfileActivity : BaseActivity() {
             mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
 
-        binding.etFirstName.isEnabled = false
-        binding.etLastName.isEnabled = false
-        binding.etEmail.isEnabled = false
+        if (mUserDetails.profileCompleted == 0) {
+            // Update the title of the screen to complete profile.
+            binding.tvTitle.text = resources.getString(R.string.title_complete_profile)
 
-        binding.etFirstName.setText(mUserDetails.firstName)
-        binding.etLastName.setText(mUserDetails.lastName)
-        binding.etEmail.setText(mUserDetails.email)
+            // Here, the some of the edittext components are disabled because it is added at a time of Registration.
+            binding.etFirstName.isEnabled = false
+            binding.etFirstName.setText(mUserDetails.firstName)
+
+            binding.etLastName.isEnabled = false
+            binding.etLastName.setText(mUserDetails.lastName)
+
+            binding.etEmail.isEnabled = false
+            binding.etEmail.setText(mUserDetails.email)
+        } else {
+
+            // Call the setup action bar function.
+            setupActionBar()
+
+            // Update the title of the screen to edit profile.
+            binding.tvTitle.text = resources.getString(R.string.title_edit_profile)
+
+            // Load the image using the GlideLoader class with the use of Glide Library.
+            GlideLoader(this@UserProfileActivity).loadUserPicture(mUserDetails.image, binding.ivUserPhoto)
+
+            // Set the existing values to the UI and allow user to edit except the Email ID.
+            binding.etFirstName.setText(mUserDetails.firstName)
+            binding.etLastName.setText(mUserDetails.lastName)
+
+            binding.etEmail.isEnabled = false
+            binding.etEmail.setText(mUserDetails.email)
+
+            if (mUserDetails.mobile != 0L) {
+                binding.etMobileNumber.setText(mUserDetails.mobile.toString())
+            }
+            if (mUserDetails.gender == Constants.MALE) {
+                binding.rbMale.isChecked = true
+            } else {
+                binding.rbFemale.isChecked = true
+            }
+        }
+
 
         binding.ivUserPhoto.setOnClickListener {
 
@@ -176,35 +211,48 @@ class UserProfileActivity : BaseActivity() {
 
         val userHashMap = HashMap<String, Any>()
 
-        // Here the field which are not editable needs no update. So, we will update user Mobile Number and Gender for now.
+        // TODO Step 5: Update the code if user is about to Edit Profile details instead of Complete Profile.
+        // Get the FirstName from editText and trim the space
+        val firstName = binding.etFirstName.text.toString().trim { it <= ' ' }
+        if (firstName != mUserDetails.firstName) {
+            userHashMap[Constants.FIRST_NAME] = firstName
+        }
+
+        // Get the LastName from editText and trim the space
+        val lastName = binding.etLastName.text.toString().trim { it <= ' ' }
+        if (lastName != mUserDetails.lastName) {
+            userHashMap[Constants.LAST_NAME] = lastName
+        }
+
+        // TODO Step 6: Email ID is not editable so we don't need to add it here to get the text from EditText.
 
         // Here we get the text from editText and trim the space
         val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
-
         val gender = if (binding.rbMale.isChecked) {
             Constants.MALE
         } else {
             Constants.FEMALE
         }
 
-        // TODO Step 7: Now update the profile image field if the image URL is not empty.
-        // START
         if (mUserProfileImageURL.isNotEmpty()) {
             userHashMap[Constants.IMAGE] = mUserProfileImageURL
         }
-        // END
 
-        if (mobileNumber.isNotEmpty()) {
+        // TODO Step 7: Update the code here if it is to edit the profile.
+        if (mobileNumber.isNotEmpty() && mobileNumber != mUserDetails.mobile.toString()) {
             userHashMap[Constants.MOBILE] = mobileNumber.toLong()
         }
 
-        userHashMap[Constants.GENDER] = gender
-        userHashMap[Constants.COMPLETE_PROFILE] = 1
+        if (gender.isNotEmpty() && gender != mUserDetails.gender) {
+            userHashMap[Constants.GENDER] = gender
+        }
 
-        // TODO 11 : Remove the show progress dialog piece of code from here to avoid the jerk hiding and showing it at the same time.
-        // START
-        // Show the progress dialog.
-        /*showProgressDialog(resources.getString(R.string.please_wait))*/
+        // Here if user is about to complete the profile then update the field or else no need.
+        // 0: User profile is incomplete.
+        // 1: User profile is completed.
+        if (mUserDetails.profileCompleted == 0) {
+            userHashMap[Constants.COMPLETE_PROFILE] = 1
+        }
         // END
 
         // call the registerUser function of FireStore class to make an entry in the database.
@@ -222,6 +270,19 @@ class UserProfileActivity : BaseActivity() {
         mUserProfileImageURL = imageURL
         updateUserProfileDetails()
 
+    }
+
+    private fun setupActionBar() {
+
+        setSupportActionBar(binding.toolbarUserProfileActivity)
+
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24)
+        }
+
+        binding.toolbarUserProfileActivity.setNavigationOnClickListener { onBackPressed() }
     }
 
 }
