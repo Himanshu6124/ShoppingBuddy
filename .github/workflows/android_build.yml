@@ -22,8 +22,21 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Clean Up
-        run: ./gradlew clean
+      # - name: Clean Up
+      #   run: ./gradlew clean
+
+      - name: Build APK
+        run: |
+          if [ ${{ steps.set-branch-name.outputs.branch }} == master ]; then
+          echo "release"
+          ./gradlew assembleRelease
+          elif [ ${{ steps.set-branch-name.outputs.branch }} == "pipeline" ]; then
+          echo "debug"
+          ./gradlew assembleDebug
+          else
+          echo "Invalid branch for building APK."
+          exit 1
+          fi
 
       # - name: Build APK
       #   run: |
