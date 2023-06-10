@@ -35,7 +35,7 @@ jobs:
           if [ "${{ steps.set-branch-name.outputs.branch }}" == "main" ]; then
             echo "release"
             ./gradlew assembleRelease
-          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "release" ]; then
+          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "pipeline" ]; then
             echo "debug"
             ./gradlew assembleDebug
           else
