@@ -38,8 +38,8 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run:     
-          echo "Hello"
+        run: echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+        
         id: extract_branch
 
       - name: Changelog
