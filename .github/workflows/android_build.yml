@@ -40,6 +40,12 @@ jobs:
         shell: bash
         run: | 
           echo"::set-output name=branch::${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+
+
+      - name: Print Branch Name
+        run: |
+          echo "Branch: ${{ steps.set-branch-name.outputs.branch }}"    
+
         
 
       - name: Changelog
@@ -47,6 +53,8 @@ jobs:
         run: |
           echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
           echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
+
+
 
       # - name: Create Release
       #   id: create_release
