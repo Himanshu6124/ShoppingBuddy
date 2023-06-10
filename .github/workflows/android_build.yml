@@ -44,7 +44,8 @@ jobs:
 
       - name: Print Branch Name
         run: |
-          echo "Branch: ${{ steps.set-branch-name.outputs.branch }}"    
+          echo "Branch: ${{ steps.set-branch-name.outputs.branch }}"  
+          echo "${{ github.ref }}"  
 
         
 
