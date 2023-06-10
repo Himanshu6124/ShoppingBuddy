@@ -25,16 +25,16 @@ jobs:
       - name: Clean Up
         run: ./gradlew clean
 
-      - name: Build APK
-        run: |
-          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
-          ./gradlew assembleDebug
-          elif [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
-          ./gradlew assembleRelease
-          else
-          echo "Invalid branch for building APK."
-          exit 1
-          fi
+      # - name: Build APK
+      #   run: |
+      #     if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #     ./gradlew assembleDebug
+      #     elif [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #     ./gradlew assembleRelease
+      #     else
+      #     echo "Invalid branch for building APK."
+      #     exit 1
+      #     fi
 
       - name: Extract branch name
         shell: bash
@@ -47,44 +47,44 @@ jobs:
           echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
           echo "::set-output name=changelog::$(git log -1 --pretty=format:'%s%n%b')"
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name:  ${{ github.run_number }}
-          release_name: Release ${{ steps.extract_branch.outputs.branch }}
-          body: ${{ steps.changelog.outputs.changelog }}
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name:  ${{ github.run_number }}
+      #     release_name: Release ${{ steps.extract_branch.outputs.branch }}
+      #     body: ${{ steps.changelog.outputs.changelog }}
 
-          draft: false
-          prerelease: false
+      #     draft: false
+      #     prerelease: false
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: |
-            if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
-              app/build/outputs/apk/release/app-release.apk
-            elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
-              app/build/outputs/apk/debug/app-debug.apk
-            else
-              echo "Invalid branch for uploading APK."
-              exit 1
-            fi
-          asset_name: |
-            if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
-              app-release.apk
-            elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
-              app-debug.apk
-            else
-              echo "Invalid branch for naming APK."
-              exit 1
-            fi
-          asset_content_type: application/vnd.android.package-archive
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: |
+      #       if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #         app/build/outputs/apk/release/app-release.apk
+      #       elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #         app/build/outputs/apk/debug/app-debug.apk
+      #       else
+      #         echo "Invalid branch for uploading APK."
+      #         exit 1
+      #       fi
+      #     asset_name: |
+      #       if [ "${{ github.ref }}" == "refs/heads/pipeline-set" ]; then
+      #         app-release.apk
+      #       elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+      #         app-debug.apk
+      #       else
+      #         echo "Invalid branch for naming APK."
+      #         exit 1
+      #       fi
+      #     asset_content_type: application/vnd.android.package-archive
 
 
       - name: Print Signing Report
