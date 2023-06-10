@@ -32,10 +32,10 @@ jobs:
 
       - name: Build APK
         run: |
-          if [ "${{ steps.set-branch-name.outputs.branch }}" == "pipeline" ]; then
+          if [ "${{ steps.set-branch-name.outputs.branch }}" == "main" ]; then
             echo "release"
             ./gradlew assembleRelease
-          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "main" ]; then
+          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "release" ]; then
             echo "debug"
             ./gradlew assembleDebug
           else
