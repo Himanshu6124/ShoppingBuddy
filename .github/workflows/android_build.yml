@@ -40,9 +40,7 @@ jobs:
         shell: bash
         run: | 
           echo"::set-output name=branch::${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          echo $branch
         
-        id: extract_branch
 
       - name: Changelog
         id: changelog
