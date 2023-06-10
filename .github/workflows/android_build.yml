@@ -5,7 +5,7 @@ on:
     branches:
       - dev
       - main
-      - pipeline-set
+      - pipeline
 jobs:
   build:
     runs-on: ubuntu-latest
