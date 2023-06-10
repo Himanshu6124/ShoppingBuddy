@@ -35,9 +35,13 @@ jobs:
           if [ "${{ steps.set-branch-name.outputs.branch }}" == "pipeline" ]; then
             echo "release"
             ./gradlew assembleRelease
-          if [ "${{ steps.set-branch-name.outputs.branch }}" == "main" ]; then
+          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "main" ]; then
             echo "debug"
             ./gradlew assembleDebug
+          else
+            echo "Invalid branch for building APK."
+            exit 1
+          fi  
 
 
       # - name: Build APK
