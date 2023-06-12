@@ -31,18 +31,18 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
 
-#      - name: Build APK
-#        run: |
-#          if [ "${{ steps.set-branch-name.outputs.branch }}" == "cicd" ]; then
-#            echo "release"
+      - name: Build APK
+        run: |
+          if [ "${{ steps.set-branch-name.outputs.branch }}" == "cicd" ]; then
+            echo "release"
 #            ./gradlew assembleRelease
-#          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "dev" ]; then
-#            echo "debug"
+          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "dev" ]; then
+            echo "debug"
 #            ./gradlew assembleDebug
-#          else
-#            echo "Invalid branch for building APK."
-#            exit 1
-#          fi
+          else
+            echo "Invalid branch for building APK."
+            exit 1
+          fi
 
       - name: Changelog
         id: changelog
@@ -72,8 +72,8 @@ jobs:
             ${{ github.ref == 'refs/heads/dev' && 'app/proguard-rules.pro' || '' }}
             ${{ github.ref == 'refs/heads/pipe-line' && 'app/google-services.json' || '' }}
           asset_name: |
-            ${{ github.ref == 'refs/heads/dev' && 'MyApp-debug.apk' || '' }}
-            ${{ github.ref == 'refs/heads/pipe-line' && 'MyApp-release.pro' || '' }}
+            ${{ github.ref == 'refs/heads/dev' && 'MyApp-debug.pro' || '' }}
+            ${{ github.ref == 'refs/heads/pipe-line' && 'MyApp-release.json' || '' }}
           asset_content_type: application/vnd.android.package-archive
 
       - name: Print Signing Report
