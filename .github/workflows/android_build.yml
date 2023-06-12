@@ -5,7 +5,7 @@ on:
     branches:
       - dev
       - master
-      - cicd
+      - pipe-line
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -70,10 +70,10 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
             ${{ github.ref == 'refs/heads/master' && 'app/build/outputs/apk/debug/app-debug.apk' || '' }}
-            ${{ github.ref == 'refs/heads/cicd' && 'app/google-services.json' || '' }}
+            ${{ github.ref == 'refs/heads/pipe-line' && 'app/google-services.json' || '' }}
           asset_name: |
             ${{ github.ref == 'refs/heads/master' && 'MyApp-debug.apk' || '' }}
-            ${{ github.ref == 'refs/heads/cicd' && 'MyApp-release.json' || '' }}
+            ${{ github.ref == 'refs/heads/pipe-line' && 'MyApp-release.json' || '' }}
           asset_content_type: application/vnd.android.package-archive
 
       - name: Print Signing Report
