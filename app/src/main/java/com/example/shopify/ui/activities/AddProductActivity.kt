@@ -30,7 +30,7 @@ class AddProductActivity : BaseActivity() {
 
         binding.btnSubmit.setOnClickListener {
 
-            is
+
         }
 
 
@@ -125,6 +125,44 @@ class AddProductActivity : BaseActivity() {
                 )
             } catch (e: IOException) {
                 e.printStackTrace()
+            }
+        }
+    }
+    private fun validateProductDetails(): Boolean {
+        return when {
+
+            mSelectedImageFileUri == null -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_select_product_image), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_title.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_title), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_price.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_enter_product_price), true)
+                false
+            }
+
+            TextUtils.isEmpty(et_product_description.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(
+                    resources.getString(R.string.err_msg_enter_product_description),
+                    true
+                )
+                false
+            }
+
+            TextUtils.isEmpty(et_product_quantity.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar(
+                    resources.getString(R.string.err_msg_enter_product_quantity),
+                    true
+                )
+                false
+            }
+            else -> {
+                true
             }
         }
     }
