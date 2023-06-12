@@ -69,11 +69,11 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: |
-            ${{ github.ref == 'refs/heads/master' && 'app/build/outputs/apk/debug/app-debug.apk' || '' }}
+            ${{ github.ref == 'refs/heads/dev' && 'app/proguard-rules.pro' || '' }}
             ${{ github.ref == 'refs/heads/pipe-line' && 'app/google-services.json' || '' }}
           asset_name: |
-            ${{ github.ref == 'refs/heads/master' && 'MyApp-debug.apk' || '' }}
-            ${{ github.ref == 'refs/heads/pipe-line' && 'MyApp-release.json' || '' }}
+            ${{ github.ref == 'refs/heads/dev' && 'MyApp-debug.apk' || '' }}
+            ${{ github.ref == 'refs/heads/pipe-line' && 'MyApp-release.pro' || '' }}
           asset_content_type: application/vnd.android.package-archive
 
       - name: Print Signing Report
