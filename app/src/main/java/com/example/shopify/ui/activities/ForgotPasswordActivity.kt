@@ -20,7 +20,6 @@ class ForgotPasswordActivity : BaseActivity() {
             if (email.isEmpty()) {
                 showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), true)
             } else {
-
                 // Show the progress dialog.
                 showProgressDialog(resources.getString(R.string.please_wait))
 
