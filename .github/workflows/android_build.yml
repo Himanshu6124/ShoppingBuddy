@@ -35,10 +35,10 @@ jobs:
         run: |
           if [ "${{ steps.set-branch-name.outputs.branch }}" == "cicd" ]; then
             echo "release"
-#            ./gradlew assembleRelease
+            echo "Hi"
           elif [ "${{ steps.set-branch-name.outputs.branch }}" == "dev" ]; then
             echo "debug"
-#            ./gradlew assembleDebug
+            echo "Hello"
           else
             echo "Invalid branch for building APK."
             exit 1
