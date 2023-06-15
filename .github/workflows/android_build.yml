@@ -31,18 +31,18 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
 
-      - name: Build APK
-        run: |
-          if [ "${{ steps.set-branch-name.outputs.branch }}" == "pipe-line" ]; then
-            echo "release"
-            echo "Hi"
-          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "dev" ]; then
-            echo "debug"
-            echo "Hello"
-          else
-            echo "Invalid branch for building APK."
-            exit 1
-          fi
+#      - name: Build APK
+#        run: |
+#          if [ "${{ steps.set-branch-name.outputs.branch }}" == "pipe-line" ]; then
+#            echo "release"
+#            echo "Hi"
+#          elif [ "${{ steps.set-branch-name.outputs.branch }}" == "dev" ]; then
+#            echo "debug"
+#            echo "Hello"
+#          else
+#            echo "Invalid branch for building APK."
+#            exit 1
+#          fi
 
       - name: Changelog
         id: changelog
@@ -55,8 +55,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name:  ${{ github.run_number }}
-          release_name: Release ${{ steps.set-branch-name.outputs.branch }}
+          tag_name:  ${{ github.run_number }}${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
           body: ${{ steps.changelog.outputs.changelog }}
 
           draft: false
