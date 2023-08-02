@@ -67,7 +67,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_product_detail_image">
 
-                <com.example.shopify.utils.CustomTextView
+                <com.himanshu.shoppingbuddy.utils.CustomTextView
                     android:id="@+id/tv_product_details_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                     android:textSize="@dimen/product_details_title_textSize"
                     tools:text="Product Title" />
 
-                <com.example.shopify.utils.CustomTextView
+                <com.himanshu.shoppingbuddy.utils.CustomTextView
                     android:id="@+id/tv_product_details_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     tools:text="$100" />
             </LinearLayout>
 
-            <com.example.shopify.utils.CustomTextView
+            <com.himanshu.shoppingbuddy.utils.CustomTextView
                 android:id="@+id/tv_product_details_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ll_product_details_title_price" />
 
-            <com.example.shopify.utils.CustomTextView
+            <com.himanshu.shoppingbuddy.utils.CustomTextView
                 android:id="@+id/tv_product_details_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_product_details_description">
 
-                <com.example.shopify.utils.CustomTextView
+                <com.himanshu.shoppingbuddy.utils.CustomTextView
                     android:id="@+id/tv_product_details_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:textColor="@color/item_value_text_color"
                     android:textSize="@dimen/product_details_label_textSize" />
 
-                <com.example.shopify.utils.CustomTextView
+                <com.himanshu.shoppingbuddy.utils.CustomTextView
                     android:id="@+id/tv_product_details_stock_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:textStyle="bold"
                     tools:text="5" />
             </LinearLayout>
-            <com.example.shopify.utils.CustomButton
+            <com.himanshu.shoppingbuddy.utils.CustomButton
                 android:id="@+id/btn_add_to_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ll_product_details_quantity"
                 tools:visibility="visible" />
 
-            <com.example.shopify.utils.CustomButton
+            <com.himanshu.shoppingbuddy.utils.CustomButton
                 android:id="@+id/btn_go_to_cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

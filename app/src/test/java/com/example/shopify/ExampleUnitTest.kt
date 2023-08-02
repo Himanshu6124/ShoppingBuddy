@@ -1,4 +1,4 @@
-package com.example.shopify
+package com.himanshu.shoppingbuddy
 
 import org.junit.Test
 

@@ -40,7 +40,7 @@
         android:paddingEnd="@dimen/dashboard_item_paddingStartEnd"
         android:paddingBottom="@dimen/dashboard_item_paddingTopBottom">
 
-        <com.example.shopify.utils.CustomTextView
+        <com.himanshu.shoppingbuddy.utils.CustomTextView
             android:id="@+id/tv_dashboard_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:textStyle="bold"
             tools:text="Item Name" />
 
-        <com.example.shopify.utils.CustomTextView
+        <com.himanshu.shoppingbuddy.utils.CustomTextView
             android:id="@+id/tv_dashboard_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

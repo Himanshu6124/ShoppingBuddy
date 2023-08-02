@@ -35,7 +35,7 @@
                 app:tint="@color/colorWhite" />
         </FrameLayout>
 
-        <com.example.shopify.utils.CustomTextView
+        <com.himanshu.shoppingbuddy.utils.CustomTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-            <com.example.shopify.utils.CustomEditText
+            <com.himanshu.shoppingbuddy.utils.CustomEditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_email">
 
-            <com.example.shopify.utils.CustomEditText
+            <com.himanshu.shoppingbuddy.utils.CustomEditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 tools:text="123456" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.example.shopify.utils.CustomTextView
+        <com.himanshu.shoppingbuddy.utils.CustomTextView
             android:id="@+id/tv_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_password" />
 
-        <com.example.shopify.utils.CustomButton
+        <com.himanshu.shoppingbuddy.utils.CustomButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_login">
 
-            <com.example.shopify.utils.CustomTextView
+            <com.himanshu.shoppingbuddy.utils.CustomTextView
                 android:id="@+id/tv_don_t_have_an_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/lbl_text_view_textSize" />
 
-            <com.example.shopify.utils.CustomTextView
+            <com.himanshu.shoppingbuddy.utils.CustomTextView
                 android:id="@+id/tv_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

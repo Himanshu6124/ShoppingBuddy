@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img_splash_background"
-    tools:context=".ui.activities.SplashActivity">
+    tools:context="com.himanshu.shoppingbuddy.ui.activities.SplashActivity">
 
-    <com.example.shopify.utils.CustomTextView
+    <com.himanshu.shoppingbuddy.utils.CustomTextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-    </com.example.shopify.utils.CustomTextView>
+    </com.himanshu.shoppingbuddy.utils.CustomTextView>
 
     <ImageView
         android:id="@+id/imageView"

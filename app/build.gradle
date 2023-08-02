@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.shopify'
+    namespace 'com.himanshu.shoppingbuddy'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.shopify"
+        applicationId "com.himanshu.shoppingbuddy"
         minSdk 21
         targetSdk 32
         versionCode 1

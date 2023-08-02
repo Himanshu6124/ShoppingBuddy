@@ -1,0 +1,180 @@
+package com.himanshu.shoppingbuddy.ui.activities
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.himanshu.shoppingbuddy.Firestore.FirestoreClass
+import com.himanshu.shoppingbuddy.R
+import com.himanshu.shoppingbuddy.databinding.ActivityProductDetailsBinding
+import com.himanshu.shoppingbuddy.models.CartItems
+import com.himanshu.shoppingbuddy.models.Product
+import com.himanshu.shoppingbuddy.utils.GlideLoader
+
+class ProductDetailsActivity : BaseActivity() {
+    private lateinit var binding : ActivityProductDetailsBinding
+    private lateinit var mProductDetails : Product
+    private var mProductId : String =""
+    private var mproductOwnerId : String =""
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityProductDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupActionBar()
+
+        binding.btnGoToCart.setOnClickListener{
+            startActivity(Intent(this,CartListActivity::class.java))
+        }
+
+
+
+        if(intent.hasExtra(com.himanshu.shoppingbuddy.utils.Constants.EXTRA_PRODUCT_ID))
+        {
+            mProductId = intent.getStringExtra(com.himanshu.shoppingbuddy.utils.Constants.EXTRA_PRODUCT_ID)!!
+//            Log.e("ghgh",mProductId)
+            getProductDetails()
+        }
+
+        if(intent.hasExtra(com.himanshu.shoppingbuddy.utils.Constants.EXTRA_PRODUCT_OWNER_ID))
+        {
+            mproductOwnerId = intent.getStringExtra(com.himanshu.shoppingbuddy.utils.Constants.EXTRA_PRODUCT_OWNER_ID)!!
+//            Log.e("ghgh",mProductId)
+
+            if(com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID() == mproductOwnerId)
+            {
+                binding.btnAddToCart.visibility = View.GONE
+                binding.btnGoToCart.visibility =View.GONE
+            }
+            else
+            {
+                binding.btnAddToCart.visibility = View.VISIBLE
+            }
+
+        }
+
+
+        binding.btnAddToCart.setOnClickListener {
+            addToCart()
+        }
+
+
+    }
+
+    private fun setupActionBar() {
+
+        setSupportActionBar(binding.toolbarProductDetailsActivity)
+
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24)
+        }
+
+        binding.toolbarProductDetailsActivity.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    /**
+     * A function to call the firestore class function that will get the product details from cloud firestore based on the product id.
+     */
+    private fun getProductDetails() {
+
+        // Show the product dialog
+        showProgressDialog(resources.getString(R.string.please_wait))
+
+        // Call the function of FirestoreClass to get the product details.
+        com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
+            .getProductDetails(this@ProductDetailsActivity, mProductId)
+    }
+
+    fun productDetailsSuccess(product: Product) {
+        mProductDetails = product
+        // Hide Progress dialog.
+//        hideProgressDialog()
+
+        // Populate the product details in the UI.
+        GlideLoader(this@ProductDetailsActivity).loadProductPicture(
+            product.image,
+            binding.ivProductDetailImage
+        )
+
+        binding.tvProductDetailsTitle.text = product.title
+        binding.tvProductDetailsPrice.text = "₹ ${product.price}"
+        binding.tvProductDetailsDescription.text = product.description
+        binding.tvProductDetailsStockQuantity.text = product.stock_quantity
+
+        if(product.stock_quantity.toInt() == 0){
+
+            // Hide Progress dialog.
+            hideProgressDialog()
+
+            // Hide the AddToCart button if the item is already in the cart.
+            binding.btnAddToCart .visibility = View.GONE
+
+            binding.tvProductDetailsStockQuantity.text =
+                resources.getString(R.string.lbl_out_of_stock)
+
+            binding.tvProductDetailsStockQuantity.setTextColor(
+                ContextCompat.getColor(
+                    this@ProductDetailsActivity,
+                    R.color.colorSnackBarError
+                )
+            )
+        }else{
+
+            // There is no need to check the cart list if the product owner himself is seeing the product details.
+            if (com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID() == product.user_id) {
+                // Hide Progress dialog.
+                hideProgressDialog()
+            } else {
+                com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
+                    .checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)
+            }
+        }
+
+
+    }
+    private fun addToCart() {
+
+        val addToCart = CartItems(
+            com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID(),
+            mproductOwnerId,
+            mProductId,
+            mProductDetails.title,
+            mProductDetails.price,
+            mProductDetails.image,
+            com.himanshu.shoppingbuddy.utils.Constants.DEFAULT_CART_QUANTITY
+        )
+        showProgressDialog("adding to cart")
+        com.himanshu.shoppingbuddy.Firestore.FirestoreClass().addCartItems(this,addToCart)
+    }
+    fun addToCartSuccess() {
+        // Hide the progress dialog.
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@ProductDetailsActivity,
+            resources.getString(R.string.success_message_item_added_to_cart),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        // Hide the AddToCart button if the item is already in the cart.
+        binding.btnAddToCart.visibility = View.GONE
+        // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
+        binding.btnGoToCart.visibility = View.VISIBLE
+    }
+
+//    * A function to notify the success result of item exists in the cart.
+    fun productExistsInCart() {
+
+        // Hide the progress dialog.
+        hideProgressDialog()
+
+        // Hide the AddToCart button if the item is already in the cart.
+        binding.btnAddToCart.visibility = View.GONE
+        // Show the GoToCart button if the item is already in the cart. User can update the quantity from the cart list screen if he wants.
+        binding.btnGoToCart.visibility = View.VISIBLE
+    }
+}

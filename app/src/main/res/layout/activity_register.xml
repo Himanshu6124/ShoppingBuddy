@@ -17,7 +17,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.example.shopify.utils.CustomTextView
+            <com.himanshu.shoppingbuddy.utils.CustomTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_first_name">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_last_name">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_email">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_password">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_confirm_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         tools:checked="false" />
 
-                    <com.example.shopify.utils.CustomTextView
+                    <com.himanshu.shoppingbuddy.utils.CustomTextView
                         android:id="@+id/tv_terms_condition"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                         android:textSize="@dimen/txt_terms_and_condition_textSize" />
                 </LinearLayout>
 
-                <com.example.shopify.utils.CustomButton
+                <com.himanshu.shoppingbuddy.utils.CustomButton
                     android:id="@+id/btn_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_register">
 
-                    <com.example.shopify.utils.CustomTextView
+                    <com.himanshu.shoppingbuddy.utils.CustomTextView
                         android:id="@+id/tv_already_have_an_account"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/lbl_text_view_textSize" />
 
-                    <com.example.shopify.utils.CustomTextView
+                    <com.himanshu.shoppingbuddy.utils.CustomTextView
                         android:id="@+id/tv_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

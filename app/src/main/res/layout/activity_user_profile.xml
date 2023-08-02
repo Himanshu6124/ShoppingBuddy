@@ -85,7 +85,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fl_user_image">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_first_name">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_last_name">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_email">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_mobile_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                         android:textStyle="bold" />
                 </RadioGroup>
 
-                <com.example.shopify.utils.CustomButton
+                <com.himanshu.shoppingbuddy.utils.CustomButton
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

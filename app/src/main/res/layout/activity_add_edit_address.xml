@@ -57,7 +57,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_full_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_full_name">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_phone_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_phone_number">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_address">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_zip_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/til_zip_code">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_additional_note"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rg_type">
 
-                    <com.example.shopify.utils.CustomEditText
+                    <com.himanshu.shoppingbuddy.utils.CustomEditText
                         android:id="@+id/et_other_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                         android:textSize="@dimen/et_textSize" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.example.shopify.utils.CustomButton
+                <com.himanshu.shoppingbuddy.utils.CustomButton
                     android:id="@+id/btn_submit_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
