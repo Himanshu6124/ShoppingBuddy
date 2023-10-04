@@ -265,7 +265,7 @@
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="@dimen/checkout_label_value_textSize" />
 
-                <com.himanshu.shoppingbuddy.utils.CustomTextView
+                <Spinner
                     android:id="@+id/tv_payment_mode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

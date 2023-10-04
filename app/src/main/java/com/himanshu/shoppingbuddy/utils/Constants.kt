@@ -50,11 +50,11 @@ object Constants {
     const val EXTRA_SELECTED_ADDRESS: String = "extra_selected_address"
 
 
-    // TODO Step 11: Declare a global constant variable to notify the add address.
     // START
     const val ADD_ADDRESS_REQUEST_CODE: Int = 121
     const val ORDERS : String ="orders"
     const val EXTRA_SOLD_PRODUCT_DETAILS : String = "extra_sold_product_details"
+    const val IS_LOGGED_IN : String = "is_logged_in"
 
     //
 

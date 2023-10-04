@@ -183,7 +183,6 @@
                 android:text="@string/btn_lbl_go_to_cart"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/btn_textSize"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_add_to_cart"

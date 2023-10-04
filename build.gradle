@@ -1,7 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-
+        maven {
+            url "https://phonepe.mycloudrepo.io/public/repositories/phonepe-intentsdk-android"
+        }
         google()  // Google's Maven repository
         mavenCentral()  // Maven Central repository
     }

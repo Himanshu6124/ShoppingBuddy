@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:allowBackup="true"
@@ -17,19 +17,22 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.SoldProductDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".ui.activities.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.MyOrderDetailsActivity"
+            android:name=".ui.activities.SoldProductDetailsActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.CheckoutActivity"
+            android:name=".ui.activities.MyOrderDetailsActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.AddEditAddressActivity"
+            android:name=".ui.activities.CheckoutActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.AddEditAddressActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -37,31 +40,31 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.AddressListActivity"
+            android:name=".ui.activities.AddressListActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.CartListActivity"
+            android:name=".ui.activities.CartListActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.ProductDetailsActivity"
+            android:name=".ui.activities.ProductDetailsActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.AddProductActivity"
+            android:name=".ui.activities.AddProductActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.SettingActivity"
+            android:name=".ui.activities.SettingActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.DashboardActivity"
+            android:name=".ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/app_name" />
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.UserProfileActivity"
+            android:name=".ui.activities.UserProfileActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -69,7 +72,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.ForgotPasswordActivity"
+            android:name=".ui.activities.ForgotPasswordActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -77,14 +80,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.BaseActivity"
+            android:name=".ui.activities.BaseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -92,14 +95,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -113,7 +116,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.himanshu.shoppingbuddy.ui.activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

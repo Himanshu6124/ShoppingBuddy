@@ -43,7 +43,7 @@ class ProductDetailsActivity : BaseActivity() {
             mproductOwnerId = intent.getStringExtra(com.himanshu.shoppingbuddy.utils.Constants.EXTRA_PRODUCT_OWNER_ID)!!
 //            Log.e("ghgh",mProductId)
 
-            if(com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID() == mproductOwnerId)
+            if(FirestoreClass().getCurrentUserID() == mproductOwnerId)
             {
                 binding.btnAddToCart.visibility = View.GONE
                 binding.btnGoToCart.visibility =View.GONE
@@ -85,7 +85,7 @@ class ProductDetailsActivity : BaseActivity() {
         showProgressDialog(resources.getString(R.string.please_wait))
 
         // Call the function of FirestoreClass to get the product details.
-        com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
+        FirestoreClass()
             .getProductDetails(this@ProductDetailsActivity, mProductId)
     }
 
@@ -125,11 +125,11 @@ class ProductDetailsActivity : BaseActivity() {
         }else{
 
             // There is no need to check the cart list if the product owner himself is seeing the product details.
-            if (com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID() == product.user_id) {
+            if (FirestoreClass().getCurrentUserID() == product.user_id) {
                 // Hide Progress dialog.
                 hideProgressDialog()
             } else {
-                com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
+                FirestoreClass()
                     .checkIfItemExistInCart(this@ProductDetailsActivity, mProductId)
             }
         }
@@ -139,7 +139,7 @@ class ProductDetailsActivity : BaseActivity() {
     private fun addToCart() {
 
         val addToCart = CartItems(
-            com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID(),
+            FirestoreClass().getCurrentUserID(),
             mproductOwnerId,
             mProductId,
             mProductDetails.title,
@@ -148,7 +148,7 @@ class ProductDetailsActivity : BaseActivity() {
             com.himanshu.shoppingbuddy.utils.Constants.DEFAULT_CART_QUANTITY
         )
         showProgressDialog("adding to cart")
-        com.himanshu.shoppingbuddy.Firestore.FirestoreClass().addCartItems(this,addToCart)
+        FirestoreClass().addCartItems(this,addToCart)
     }
     fun addToCartSuccess() {
         // Hide the progress dialog.

@@ -69,7 +69,6 @@ class CartListActivity : BaseActivity() {
         // Hide progress dialog.
         hideProgressDialog()
 
-        // TODO Step 2: Remove the for loop and display the list of cart items in the recycler view along with total amount.
         // START
 
         for (product in mProductsList) {
@@ -86,7 +85,6 @@ class CartListActivity : BaseActivity() {
         }
         // END
 
-        // TODO Step 5: Initialize the global variable of cart list items.
         // START
         mCartListItem = cartList
 

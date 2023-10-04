@@ -1,6 +1,8 @@
 package com.himanshu.shoppingbuddy.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -15,12 +17,16 @@ import com.google.firebase.auth.FirebaseAuth
 class SettingActivity : BaseActivity() {
     private lateinit var binding : ActivitySettingBinding
     private lateinit var muserDetails : User
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_setting)
 
         setupActionBar()
         binding.btnLogout.setOnClickListener {
+            sharedPreferences = getSharedPreferences(resources.getString(R.string.app_name), Context.MODE_PRIVATE)
+            sharedPreferences.edit().clear().apply()
+
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this@SettingActivity,LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

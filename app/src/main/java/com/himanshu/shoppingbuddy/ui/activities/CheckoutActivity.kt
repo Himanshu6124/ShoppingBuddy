@@ -1,10 +1,12 @@
 package com.himanshu.shoppingbuddy.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Adapter
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +30,8 @@ class CheckoutActivity : BaseActivity() {
     private lateinit var mProductsList: ArrayList<Product>
     private lateinit var mCartItemsList: ArrayList<CartItems>
     private lateinit var mOrderDetails: Order
+    private val paymentMethodList : ArrayList<String> = arrayListOf("COD","UPI")
+    private var selectedPayment : String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +39,27 @@ class CheckoutActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_checkout)
         setupActionBar()
 
+        binding.tvPaymentMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, p1: View?, p2: Int, p3: Long) {
+
+                val selectedPosition = parent.getItemAtPosition(p2).toString()
+                selectedPayment = selectedPosition
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+
+
+        val paymentMethodAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,paymentMethodList)
+        binding.tvPaymentMode.adapter = paymentMethodAdapter
+
+
         if (intent.hasExtra(Constants.EXTRA_SELECTED_ADDRESS)) {
             mAddressDetails =
-                intent.getParcelableExtra<Address>(Constants.EXTRA_SELECTED_ADDRESS)!!
+                intent.getParcelableExtra(Constants.EXTRA_SELECTED_ADDRESS)!!
 
-
-//                Log.d(mAddressDetails!!.,"jod")
         }
 
 
@@ -79,7 +98,7 @@ class CheckoutActivity : BaseActivity() {
         // Show the progress dialog.
         showProgressDialog(resources.getString(R.string.please_wait))
 
-        com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getAllProductsList(this@CheckoutActivity)
+        FirestoreClass().getAllProductsList(this@CheckoutActivity)
     }
 
     /**
@@ -89,25 +108,17 @@ class CheckoutActivity : BaseActivity() {
      */
     fun successProductsListFromFireStore(productsList: ArrayList<Product>) {
 
-        // TODO Step 8: Initialize the global variable of all product list.
-        // START
         mProductsList = productsList
-        // END
-
-        // TODO Step 10: Call the function to get the latest cart items.
-        // START
         getCartItemsList()
-        // END
     }
     /**
      * A function to get the list of cart items in the activity.
      */
     private fun getCartItemsList() {
 
-        com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCartList(this@CheckoutActivity)
+        FirestoreClass().getCartList(this@CheckoutActivity)
     }
 
-    // TODO Step 11: Create a function to notify the success result of the cart items list from cloud firestore.
     // START
     /**
      * A function to notify the success result of the cart items list from cloud firestore.
@@ -127,7 +138,6 @@ class CheckoutActivity : BaseActivity() {
             }
         }
 
-        // TODO Step 13: Initialize the cart list.
         // START
         mCartItemsList = cartList
 
@@ -165,45 +175,45 @@ class CheckoutActivity : BaseActivity() {
     }
     private fun placeAnOrder() {
 
-        // Show the progress dialog.
-        showProgressDialog(resources.getString(R.string.please_wait))
+        if(selectedPayment == "UPI"){
+            val intent = Intent(this,PaymentActivity::class.java)
+            startActivity(intent)
+        }
 
-        // TODO Step 7: Make the variable global.
-        mOrderDetails = Order(
-            com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getCurrentUserID(),
-            mCartItemsList,
-            mAddressDetails!!,
-            "My order ${System.currentTimeMillis()}",
-            mCartItemsList[0].image,
-            mSubTotal.toString(),
-            "10.0", // The Shipping Charge is fixed as $10 for now in our case.
-            mTotalAmount.toString(),
-            System.currentTimeMillis()
-        )
+        else {
+            // Show the progress dialog.
+            showProgressDialog(resources.getString(R.string.please_wait))
 
-        com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
-            .placeOrder(this@CheckoutActivity, mOrderDetails)
+            mOrderDetails = Order(
+                FirestoreClass().getCurrentUserID(),
+                mCartItemsList,
+                mAddressDetails!!,
+                "My order ${System.currentTimeMillis()}",
+                mCartItemsList[0].image,
+                mSubTotal.toString(),
+                "10.0", // The Shipping Charge is fixed as $10 for now in our case.
+                mTotalAmount.toString(),
+                System.currentTimeMillis()
+            )
+
+            FirestoreClass()
+                .placeOrder(this@CheckoutActivity, mOrderDetails)
+        }
     }
-    // END
 
 
-    // TODO Step 8: Create a function to notify the success result of the order placed.
-    // START
     /**
      * A function to notify the success result of the order placed.
      */
     fun orderPlacedSuccess() {
 
-       com.himanshu.shoppingbuddy.Firestore.FirestoreClass()
+       FirestoreClass()
            .updateAllDetails(this,mCartItemsList,mOrderDetails)
     }
     // END
 
     fun allDetailsUpdatedSuccessfully() {
 
-        // TODO Step 6: Move the piece of code from OrderPlaceSuccess to here.
-        // START
-        // Hide the progress dialog.
         hideProgressDialog()
 
         Toast.makeText(this@CheckoutActivity, "Your order placed successfully.", Toast.LENGTH_SHORT)
@@ -213,6 +223,5 @@ class CheckoutActivity : BaseActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
-        // END
     }
 }

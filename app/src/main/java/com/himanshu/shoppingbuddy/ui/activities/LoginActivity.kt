@@ -1,6 +1,8 @@
 package com.himanshu.shoppingbuddy.ui.activities
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
@@ -22,6 +25,15 @@ class LoginActivity : BaseActivity() {
 
         @Suppress("Deprecation")
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        sharedPreferences = getSharedPreferences(resources.getString(R.string.app_name),Context.MODE_PRIVATE)
+
+        val loggingStatus = sharedPreferences.getString(Constants.IS_LOGGED_IN,null)
+
+        if(loggingStatus == "true") {
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+            finish()
+        }
 
         //sent to LogInActivity
         binding.tvRegister.setOnClickListener {
@@ -77,6 +89,12 @@ class LoginActivity : BaseActivity() {
 //                    hideProgressDialog()
 
                     if (task.isSuccessful) {
+
+                        sharedPreferences = getSharedPreferences(resources.getString(R.string.app_name),Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor?.putString(Constants.IS_LOGGED_IN, "true")
+                        editor?.apply()
+
                         com.himanshu.shoppingbuddy.Firestore.FirestoreClass().getUserDetails(this)
 
                     } else {
@@ -108,5 +126,15 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(Constants.IS_LOGGED_IN == "true"){
+            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+            finish()
+        }
+
     }
 }

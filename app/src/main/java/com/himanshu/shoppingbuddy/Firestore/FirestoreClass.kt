@@ -316,7 +316,7 @@ class FirestoreClass {
                 val productsList: ArrayList<Product> = ArrayList()
 
                 // A for loop as per the list of documents to convert them into Products ArrayList.
-                for (i in document.documents) {
+                for (i in document) {
 
                     val product = i.toObject(Product::class.java)!!
                     product.product_id = i.id
